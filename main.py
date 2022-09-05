@@ -4,29 +4,27 @@ from turtle import Screen, Turtle
 
 screen = Screen()
 screen.bgcolor("black")
-snake = Turtle()
-snake.color("white")
-snake.shape("square")
 
-print(snake.pos())
+
 
 body = []
 snake_length = 3
-y = 1
+y = 0
 while y < 3:
-    tur = Turtle()
-    tur.shape("square")
+    tur = Turtle(shape="square", visible=False)
     tur.color("white")
     tur.penup()
-    tur.goto(-y * 22, 0)
+    tur.goto(-y * 15, 0)
+    tur.showturtle()
     body.append(tur)
     y += 1
 
-
 while True:
-    x = 1
+    x = 0
     while x < snake_length:
-
-
+        body[x].forward(5)
+        x += 1
+    if body[0].xcor()+20 == screen.window_width() / 2:
+        break
 
 screen.exitonclick()
