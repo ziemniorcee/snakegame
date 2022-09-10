@@ -25,7 +25,7 @@ def xd():
 
 def travel():
     n = 0
-    while n < 5:
+    while n < 1:
         x = 0
         while x < snake_length:
             body[x].forward(1)
@@ -37,7 +37,7 @@ def travel():
 def go_up():
     x = 0
     start_x, start_y = body[0].pos()
-
+    if turtle.heading() == 0:
     while x < snake_length:
         bod_x, bod_y = body[x].pos()
         if bod_x >= start_x:
@@ -57,9 +57,23 @@ def go_up():
 
 def go_left():
     x = 0
+    start_x, start_y = body[0].pos()
+
     while x < snake_length:
-        body[x].setheading(180)
-        x += 1
+        bod_x, bod_y = body[x].pos()
+        if bod_y >= start_y:
+            body[x].setheading(180)
+            x += 1
+
+        else:
+            while bod_y < start_y:
+                print(start_x, start_y)
+                print(bod_x, bod_y)
+                print(" ")
+                travel()
+                bod_x, bod_y = body[x].pos()
+    while True:
+        travel()
 
 
 def go_right():
@@ -71,9 +85,23 @@ def go_right():
 
 def go_down():
     x = 0
+    start_x, start_y = body[0].pos()
+
     while x < snake_length:
-        body[x].setheading(270)
-        x += 1
+        bod_x, bod_y = body[x].pos()
+        if bod_x >= start_x:
+            body[x].setheading(270)
+            x += 1
+
+        else:
+            while bod_x < start_x:
+                print(start_x, start_y)
+                print(bod_x, bod_y)
+                print(" ")
+                travel()
+                bod_x, bod_y = body[x].pos()
+    while True:
+        travel()
 
 
 screen.onkey(go_up, 'Up')
