@@ -1,51 +1,36 @@
 from turtle import Screen, Turtle
+import time
 
 screen = Screen()
+screen.setup(width=600, height=600)
 screen.bgcolor("black")
+screen.title("My Snake game")
+screen.tracer(0)
+starting_position = [(0, 0), (-20, 0), (-40, 0)]
 
-head = Turtle(shape="square")
-head.color("white")
-body_length = 2
+segments = []
 
+for position in starting_position:
+    new_segment = Turtle("square")
+    new_segment.color("white")
+    new_segment.penup()
+    new_segment.goto(position)
+    segments.append(new_segment)
 
-def create_body():
-    snake_body = []
-    x = 0
-    while x < 2:
-        tur = Turtle(shape="square", visible=False)
-        tur.color("white")
-        tur.penup()
-        tur.goto(-x * 15, 0)
-        tur.speed('fastest')
-        tur.showturtle()
-        snake_body.append(tur)
-        x += 1
-    return snake_body
+game_is_on = True
+while game_is_on:
+    screen.update()
+    time.sleep(1)
 
+    for seg_num in range(len(segments) - 1, 0, -1):
+        new_x = segments[seg_num - 1].xcor()
+        new_y = segments[seg_num - 1].ycor()
+        segments[seg_num].goto(new_x, new_y)
+    segments[0].forward(20)
 
-def follow():
-    x = 0
-    while x < body_length:
-        if head.heading() != body[x].heading():
-
-
-def
+    segments[0].left(90)
 
 
-def travel():
-    head.forward(1)
-    screen.ontimer(travel, 10)
 
 
-screen.onkey(lambda: head.setheading(90), 'Up')
-screen.onkey(lambda: head.setheading(180), 'Left')
-screen.onkey(lambda: head.setheading(0), 'Right')
-screen.onkey(lambda: head.setheading(270), 'Down')
-
-body = create_body()
-
-screen.listen()
-
-travel()
-follow()
 screen.exitonclick()
