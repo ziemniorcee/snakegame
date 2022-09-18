@@ -20,7 +20,6 @@ screen.onkey(snake.down, "Down")
 screen.onkey(snake.left, "Left")
 screen.onkey(snake.right, "Right")
 
-
 game_is_on = True
 while game_is_on:
 
@@ -30,10 +29,13 @@ while game_is_on:
 
     if snake.segments[0].distance(food) < 15:
         food.refresh()
+        snake.extend()
         score.update()
     if snake.wall():
         score.game_over()
         game_is_on = False
-
-
+    for segment in snake.segments[1:]:
+        if snake.segments[0].distance(segment) < 10:
+            game_is_on = False
+            score.game_over()
 screen.exitonclick()
